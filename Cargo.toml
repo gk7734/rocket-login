@@ -1,0 +1,14 @@
+[package]
+name = "learn-rocket"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rocket = { version = "0.5.1", features = ["json"] }
+serde = { version = "1.0.210", features = ["derive"] }
+jsonwebtoken = "9.3.0"
+bcrypt = "0.15.1"
+tokio = "1.40.0"
+diesel = { version = "2.2.4", features = ["postgres", "r2d2", "chrono"] }
+dotenv = "0.15.0"
+rocket_sync_db_pools = { version = "0.1.0" }
