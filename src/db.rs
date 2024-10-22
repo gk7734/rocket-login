@@ -1,11 +1,9 @@
 pub mod connection;
 pub mod models;
 
-use rocket::fairing::AdHoc;
+use diesel::r2d2::{ self, ConnectionManager };
+use diesel::PgConnection;
+use rocket_sync_db_pools::database;
 
-pub fn init() -> AdHoc {
-    AdHoc::on_ignite("Database", |rocket| async {
-        let db = connection::establish_connection().await;
-        rocket.manage(db)
-    })
-}
+#[database("diesel_postgres_pool")]
+pub struct DbConn(r2d2::Pool<ConnectionManager<PgConnection>>);

@@ -1,11 +1,19 @@
 use bcrypt::{hash, verify};
 use serde::{Serialize, Deserialize };
+use diesel::{Insertable, Queryable};
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Queryable, Serialize, Deserialize)]
 pub struct User {
     pub id: i32,
     pub username: String,
     pub password: String,
+}
+
+#[derive(Insertable, Deserialize)]
+#[table_name = "users"]
+pub struct NewUser<'a> {
+    pub username: &'a str,
+    pub password: &'a str,
 }
 
 impl User {
